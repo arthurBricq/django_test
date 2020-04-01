@@ -17,8 +17,6 @@ class Service(models.Model):
     content = models.CharField(max_length=1000)
     company = models.ForeignKey(Company, on_delete = models.CASCADE)
 
-
-
 def get_request(request):
     """
     This method shows how to use GET urls to send data
@@ -45,5 +43,14 @@ def get_post(request):
 def handle_database_view(request):
     # This page should list all the existing companies
     allCompanies = Company.objects.all()
-    s = sum([c.name + "  -  " for c in allCompanies])
+    s = ""
+    for c in allCompanies:
+        s += c.name + "  -  "
+    print(s)
     return HttpResponse("All companies : " + s)
+    
+    
+def create_company_view(request, name):
+    c = Company(name = name)
+    c.save()
+    return HttpResponse("Company " + name + " was created")

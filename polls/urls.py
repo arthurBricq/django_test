@@ -15,5 +15,6 @@ urlpatterns = [
     path('test_get/', database_function.get_request),
     path('test_post/', database_function.get_post),
     # Testing a new database for the app
-    path('database/',database_function.handle_database_view)
+    path('see_database/',database_function.handle_database_view),
+    path('create_company/<slug:name>', database_function.create_company_view)
 ]
