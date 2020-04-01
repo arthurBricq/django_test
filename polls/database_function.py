@@ -1,7 +1,23 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db import models
 
-from .models import Company
+# from .models import Company
+
+
+# Test for the app
+
+# Companies have names and different services, we want to be able to retrieve this from a special link
+
+class Company(models.Model):
+    name = models.CharField(max_length=200)
+
+class Service(models.Model):
+    name = models.CharField(max_length=200)
+    content = models.CharField(max_length=1000)
+    company = models.ForeignKey(Company, on_delete = models.CASCADE)
+
+
 
 def get_request(request):
     """
